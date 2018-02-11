@@ -1,0 +1,15 @@
+{
+    "bootsuffix": "_boot",
+    "buildprefix": "build_",
+    "change": "Publishing first bootloader and BSP",
+    "description": "This BSP can be used to run Stratify OS on the STM32F411E-DISCO board.",
+    "github": "https://github.com/StratifyLabs/STM32F411E-DISCO",
+    "hardwareid": "0x00000009",
+    "name": "STM32F411E-DISCO",
+    "permissions": "public",
+    "publisher": "Stratify Labs, Inc",
+    "tags": "stm32,arm,cortex-m4",
+    "type": "StratifyKernel",
+    "uid": "QSW7bQHeDqhJEcZ0mxQ5SmEYUSL2",
+    "version": "0.1"
+}
