@@ -40,12 +40,12 @@ const mcu_board_config_t mcu_board_config = {
 		.core_cpu_freq = STFY_SYSTEM_CLOCK,
 		.core_periph_freq = STFY_SYSTEM_CLOCK,
 		.usb_max_packet_zero = MCU_CORE_USB_MAX_PACKET_ZERO_VALUE,
-        .debug_uart_port = 2, //USART3 - is connected to mbed console
+        .debug_uart_port = 1, //USART2 - is connected to mbed console
 		.debug_uart_attr = {
 				.pin_assignment =
 				{
-						.rx = {3, 9},
-						.tx = {3, 8},
+                        .rx = {0, 3},
+                        .tx = {0, 2},
 						.cts = {0xff, 0xff},
 						.rts = {0xff, 0xff}
 				},
@@ -54,7 +54,7 @@ const mcu_board_config_t mcu_board_config = {
 				.width = 8
 		},
 		.o_flags = MCU_BOARD_CONFIG_FLAG_LED_ACTIVE_HIGH,
-		.led = {1, 7},
+        .led = {3, 15}, //PD15
 		.event_handler = 0,
 		.usb_rx_buffer = usb_rx_buffer,
 		.usb_rx_buffer_size = USB_RX_BUFFER_SIZE
