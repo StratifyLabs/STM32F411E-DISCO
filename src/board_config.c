@@ -40,6 +40,7 @@ limitations under the License.
 #include "board_trace.h"
 #include "link_transport.h"
 
+//openocd -f interface/stlink-v2.cfg -f target/stm32f4x_stlink.cfg
 
 #define SOS_BOARD_SYSTEM_CLOCK 168000000
 #define SOS_BOARD_PERIPH_CLOCK (SOS_BOARD_SYSTEM_CLOCK/4)
