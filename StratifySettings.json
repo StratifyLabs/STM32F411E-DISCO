@@ -1,11 +1,15 @@
 {
     "bootsuffix": "_boot",
     "buildprefix": "build_",
-    "change": "Publishing first bootloader and BSP",
+    "change": "Added drivers and updated and built from GCC 6.3",
     "changes": {
         "-L5A3N8YMe-uVevhvI8Z": {
             "description": "Publishing first bootloader and BSP",
             "version": "0.1"
+        },
+        "-L6TcRBKAqTkoxUwz_qX": {
+            "description": "Added drivers and updated and built from GCC 6.3",
+            "version": "0.2"
         }
     },
     "description": "This BSP can be used to run Stratify OS on the STM32F411E-DISCO board.",
@@ -17,5 +21,5 @@
     "tags": "stm32,arm,cortex-m4",
     "type": "StratifyKernel",
     "uid": "QSW7bQHeDqhJEcZ0mxQ5SmEYUSL2",
-    "version": "0.1"
+    "version": "0.2"
 }
