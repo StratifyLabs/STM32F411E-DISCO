@@ -42,7 +42,7 @@ limitations under the License.
 
 //openocd -f interface/stlink-v2.cfg -f target/stm32f4x_stlink.cfg
 
-#define SOS_BOARD_SYSTEM_CLOCK 168000000
+#define SOS_BOARD_SYSTEM_CLOCK 96000000
 #define SOS_BOARD_PERIPH_CLOCK (SOS_BOARD_SYSTEM_CLOCK/4)
 #define SOS_BOARD_SYSTEM_MEMORY_SIZE (8192*3)
 #define SOS_BOARD_TASK_TOTAL 10
@@ -118,7 +118,7 @@ const sos_board_config_t sos_board_config = {
     .stderr_dev = "/dev/stdio-out",
     .o_sys_flags = SYS_FLAG_IS_STDIO_FIFO | SYS_FLAG_IS_TRACE,
     .sys_name = "STM32F411E-DISCO",
-    .sys_version = "0.2",
+    .sys_version = "0.3",
     .sys_id = "-L5A3NAus0oBnO24VOxZ",
     .sys_memory_size = SOS_BOARD_SYSTEM_MEMORY_SIZE,
     .start = sos_default_thread,
@@ -136,51 +136,18 @@ volatile task_t sos_task_table[SOS_BOARD_TASK_TOTAL] MCU_SYS_MEM;
 
 #define USER_ROOT 0
 
-#define UART0_DEVFIFO_BUFFER_SIZE 1024
-char uart0_fifo_buffer[UART0_DEVFIFO_BUFFER_SIZE];
+UARTFIFO_DECLARE_CONFIG_STATE(uart0_fifo, //name
+                1024, //buffer size
+                UART_FLAG_SET_LINE_CODING_DEFAULT, 8, 115200, //default UART settings
+                0, 2, //tx
+                0, 3, //rx
+                0xff, 0xff, //rts is not used
+                0xff, 0xff); //cts is not used
 
-const uartfifo_config_t uart0_fifo_cfg = {
-    .uart.attr = {
-        .o_flags = UART_FLAG_IS_PARITY_NONE | UART_FLAG_IS_STOP1 | UART_FLAG_SET_LINE_CODING,
-        .width = 8,
-        .freq = 115200,
-        .pin_assignment = {
-            .tx = {0, 2},
-            .rx = {0, 3},
-            .rts = {0xff, 0xff},
-            .cts = {0xff, 0xff}
-        }
-    },
-    .fifo = { .size = UART0_DEVFIFO_BUFFER_SIZE, .buffer = uart0_fifo_buffer }
-};
-
-uartfifo_state_t uart0_fifo_state MCU_SYS_MEM;
-//uartfifo_state_t uart0_fifo_state MCU_SYS_MEM;
-
-#define UART1_DEVFIFO_BUFFER_SIZE 64
-char uart1_fifo_buffer[UART1_DEVFIFO_BUFFER_SIZE];
-const uartfifo_config_t uart1_fifo_cfg = {
-    .fifo = { .size = UART1_DEVFIFO_BUFFER_SIZE, .buffer = uart1_fifo_buffer }
-};
-uartfifo_state_t uart1_fifo_state MCU_SYS_MEM;
-
-#define UART3_DEVFIFO_BUFFER_SIZE 64
-char uart3_fifo_buffer[UART3_DEVFIFO_BUFFER_SIZE];
-const uartfifo_config_t uart3_fifo_cfg = {
-    .fifo = { .size = UART3_DEVFIFO_BUFFER_SIZE, .buffer = uart3_fifo_buffer }
-};
-uartfifo_state_t uart3_fifo_state MCU_SYS_MEM;
 
 #define STDIO_BUFFER_SIZE 128
-
-char stdio_out_buffer[STDIO_BUFFER_SIZE];
-char stdio_in_buffer[STDIO_BUFFER_SIZE];
-
-fifo_config_t stdio_in_cfg = { .buffer = stdio_in_buffer, .size = STDIO_BUFFER_SIZE };
-fifo_config_t stdio_out_cfg = { .buffer = stdio_out_buffer, .size = STDIO_BUFFER_SIZE };
-fifo_state_t stdio_out_state;
-fifo_state_t stdio_in_state;
-
+FIFO_DECLARE_CONFIG_STATE(stdio_in, STDIO_BUFFER_SIZE);
+FIFO_DECLARE_CONFIG_STATE(stdio_out, STDIO_BUFFER_SIZE);
 
 #define FIFO_COUNT 4
 #define FIFO_SIZE 256
@@ -248,6 +215,8 @@ const devfs_device_t devfs_list[] = {
     DEVFS_DEVICE("tmr9", mcu_tmr, 9, 0, 0, 0666, USER_ROOT, S_IFCHR),
     DEVFS_DEVICE("tmr10", mcu_tmr, 10, 0, 0, 0666, USER_ROOT, S_IFCHR), //TIM11
 
+    DEVFS_DEVICE("uart0", uartfifo, 0, &uart0_fifo_config, &uart0_fifo_state, 0666, USER_ROOT, S_IFCHR),
+
 
     /*
             DEVFS_DEVICE("adc0", mcu_adc, 0, 0, 0, 0666, USER_ROOT, S_IFCHR),
@@ -284,8 +253,8 @@ const devfs_device_t devfs_list[] = {
             //FIFO buffers used for std in and std out
 
              */
-    DEVFS_DEVICE("stdio-out", fifo, 0, &stdio_out_cfg, &stdio_out_state, 0666, USER_ROOT, S_IFCHR),
-    DEVFS_DEVICE("stdio-in", fifo, 0, &stdio_in_cfg, &stdio_in_state, 0666, USER_ROOT, S_IFCHR),
+    DEVFS_DEVICE("stdio-out", fifo, 0, &stdio_out_config, &stdio_out_state, 0666, USER_ROOT, S_IFCHR),
+    DEVFS_DEVICE("stdio-in", fifo, 0, &stdio_in_config, &stdio_in_state, 0666, USER_ROOT, S_IFCHR),
 
 
     //system devices
