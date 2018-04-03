@@ -32,7 +32,17 @@ const struct __sFILE_fake __sf_fake_stderr;
 
 #include "../src/config.h"
 //Bootloader configuration (don't need Stratify OS configuration for just the bootloader)
-STM32_NUCLEO144_DECLARE_BOOT_BOARD_CONFIG(&link_transport);
+
+extern u32 _flash_start; 
+const bootloader_board_config_t boot_board_config = { 
+    .sw_req_loc = 0x20004000, 
+    .sw_req_value = 0x55AA55AA, 
+    .program_start_addr = 0x40000 + (u32)&_flash_start, 
+    .hw_req = {DISCO_BOOT_HARDWARE_REQUEST_PORT, DISCO_BOOT_HARDWARE_REQUEST_PIN}, 
+    .o_flags = BOOT_BOARD_CONFIG_FLAG_HW_REQ_ACTIVE_HIGH, 
+    .link_transport_driver = &link_transport,
+    .id = __HARDWARE_ID 
+};
 
 extern void boot_main();
 

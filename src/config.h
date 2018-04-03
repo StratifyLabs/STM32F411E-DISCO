@@ -62,6 +62,8 @@ limitations under the License.
 #define DISCO_DEBUG_UART_TX_PIN 2
 #define DISCO_LED_PORT 3
 #define DISCO_LED_PIN 15
+#define DISCO_BOOT_HARDWARE_REQUEST_PORT 0
+#define DISCO_BOOT_HARDWARE_REQUEST_PIN 0
 
 //--------------------------------------------Symbols-------------------------------------------------
 
