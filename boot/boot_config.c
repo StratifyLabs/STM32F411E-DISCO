@@ -40,7 +40,7 @@ const bootloader_board_config_t boot_board_config = {
     .program_start_addr = 0x40000 + (u32)&_flash_start, 
     .hw_req = {DISCO_BOOT_HARDWARE_REQUEST_PORT, DISCO_BOOT_HARDWARE_REQUEST_PIN}, 
     .o_flags = BOOT_BOARD_CONFIG_FLAG_HW_REQ_ACTIVE_HIGH, 
-    .link_transport_driver = &link_transport,
+    .link_transport_driver = &link_transport, 
     .id = __HARDWARE_ID 
 };
 

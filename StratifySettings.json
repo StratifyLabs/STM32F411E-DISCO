@@ -1,7 +1,7 @@
 {
     "bootsuffix": "_boot",
     "buildprefix": "build_",
-    "change": "Updated clock configuration and arch definition",
+    "change": "Updated to sync with STM32 BSPs",
     "changes": {
         "-L5A3N8YMe-uVevhvI8Z": {
             "description": "Publishing first bootloader and BSP",
@@ -14,6 +14,10 @@
         "-L7adEuUOURNg3EINKLY": {
             "description": "Updated clock configuration and arch definition",
             "version": "0.3"
+        },
+        "-L9fXv0zHTc-w9BxIfCs": {
+            "description": "Updated to sync with STM32 BSPs",
+            "version": "0.9"
         }
     },
     "description": "This BSP can be used to run Stratify OS on the STM32F411E-DISCO board.",
@@ -25,5 +29,5 @@
     "tags": "stm32,arm,cortex-m4",
     "type": "StratifyKernel",
     "uid": "QSW7bQHeDqhJEcZ0mxQ5SmEYUSL2",
-    "version": "0.3"
+    "version": "0.9"
 }
