@@ -6,7 +6,12 @@
    "publisher": "Stratify Labs, Inc",
    "tags": "stm32,arm,cortex-m4",
    "type": "os",
-   "uid": "QSW7bQHeDqhJEcZ0mxQ5SmEYUSL2",
+   "uid": "9cQyOTk3fZXOuMtPyf5j9X4H4b83",
    "version": "0.9",
-   "hardwareId": "0x00000009"
+   "hardwareId": "0x00000009",
+   "timestamp": 1558231936,
+   "documentId": "G9QifVDvtWJKHFR7Z3ZM",
+   "buildList": {
+      "d6HQA0ZszdVfPygab0hS": "0.9"
+   }
 }

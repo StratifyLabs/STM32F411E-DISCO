@@ -22,15 +22,16 @@ limitations under the License.
 #include <mcu/arch.h>
 
 #include "board_config.h"
+#include "sl_config.h"
 
 //openocd -f interface/stlink-v2-1.cfg -f target/stm32f4x_stlink.cfg
 
 
 #define SOS_BOARD_SYSTEM_CLOCK 96000000
 #define SOS_BOARD_SYSTEM_MEMORY_SIZE (8192*3)
-#define SOS_BOARD_ID "-L5A3NAus0oBnO24VOxZ"
+#define SOS_BOARD_ID SL_CONFIG_DOCUMENT_ID
 #define SOS_BOARD_VERSION "0.12"
-#define SOS_BOARD_NAME "STM32F411E-DISCO"
+#define SOS_BOARD_NAME SL_CONFIG_NAME
 
 #define SOS_BOARD_USB_RX_BUFFER_SIZE 512
 #define SOS_BOARD_STDIO_BUFFER_SIZE 512

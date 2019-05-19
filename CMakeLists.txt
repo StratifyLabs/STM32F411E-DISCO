@@ -9,13 +9,14 @@ endif()
 
 include(${SOS_TOOLCHAIN_CMAKE_PATH}/sos-variables.cmake)
 set(CMAKE_TOOLCHAIN_FILE ${SOS_TOOLCHAIN_CMAKE_PATH}/sos-bsp-toolchain.cmake)
-get_filename_component(SOS_BSP_NAME ${CMAKE_SOURCE_DIR} NAME)
-project(${SOS_BSP_NAME} CXX C)
+
+get_filename_component(SOS_NAME ${CMAKE_SOURCE_DIR} NAME)
+project(${SOS_NAME} CXX C)
 
 #Add sources to the project
 set(SOURCES_PREFIX ${CMAKE_SOURCE_DIR}/src)
 add_subdirectory(src)
-list(APPEND SOS_KERNEL_SOURCELIST ${SOURCES})
+list(APPEND SOS_KERNEL_SOURCELIST ${SOURCES} sl_settings.json src/sl_config.h)
 
 #Change to boot sources
 set(SOURCES "")
